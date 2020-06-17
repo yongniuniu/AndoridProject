@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -8,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,9 +54,36 @@ public class OkHttpUtil {
     }
 
    /* 发送Post请求*/
-    public static String postReuest(String url, Map<String,String > map){
+    public static String postReuest(final String url, final Map<String,String > map) throws ExecutionException, InterruptedException {
 
-        return  null;
+        FutureTask futureTask=new FutureTask(new Callable() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public Object call() throws Exception {
+                //实现http内容
+                FormBody.Builder builder=new FormBody.Builder();
+                map.forEach( builder::add);
+          /*      builder.add("name",);*/
+
+                Request request=new Request.Builder()
+                        .url(url)
+                        /*.post()*/
+                        .build();
+                /*打开网址*/
+                //得到服务器响应
+                Response response=okHttpClient.newCall(request).execute();
+                //预处理
+                if(response.isSuccessful() && response.body()!=null){
+                    return  response.body().string();
+                }else{
+                    return  null;
+                }
+
+            }
+        });
+        threadPoll.execute(futureTask);
+
+        return futureTask.get().toString() ;
     }
 
 

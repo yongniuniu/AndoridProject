@@ -63,11 +63,12 @@ public class OkHttpUtil {
                 //实现http内容
                 FormBody.Builder builder=new FormBody.Builder();
                 map.forEach( builder::add);
+                FormBody formBody=builder.build();
           /*      builder.add("name",);*/
 
                 Request request=new Request.Builder()
                         .url(url)
-                        /*.post()*/
+                        .post(formBody)
                         .build();
                 /*打开网址*/
                 //得到服务器响应

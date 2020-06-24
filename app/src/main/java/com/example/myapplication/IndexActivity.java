@@ -21,6 +21,7 @@ public class IndexActivity extends FragmentActivity implements Callbacks {
         switch (id){
             case 0:
                 //跳转到查看竞得物品界面
+                //下节课继续
                 intent = new Intent(this,ItemActivity.class);
                 intent.putExtra("url","");
                 startActivity(intent);

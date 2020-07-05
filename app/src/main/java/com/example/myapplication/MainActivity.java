@@ -11,11 +11,8 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-/**
- * 完整的项目代码
- * 1704020221 黄丽红
- */
-import okhttp3.OkHttpClient;
+
+
 
 public class MainActivity extends AppCompatActivity {
 

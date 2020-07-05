@@ -12,15 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.qimotest.dummy.DummyContent;
-import com.example.qimotest.dummy.DummyContent.DummyItem;
+import com.example.myapplication.dummy.DummyContent;
+import com.example.myapplication.dummy.DummyContent.DummyItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -79,7 +79,7 @@ public class ItemFragment extends Fragment {
             }
             String result = null;
             //
-            ArrayList<DummyItem> arrayList = new ArrayList<DummyItem>();
+            ArrayList<DummyContent.DummyItem> arrayList = new ArrayList<DummyContent.DummyItem>();
             try {
 
                 result = OkHttpUtil.getRequest(
@@ -89,7 +89,7 @@ public class ItemFragment extends Fragment {
                 JSONArray jsonArray = new JSONArray(result);
                 for (int i = 0; i < jsonArray.length(); i++){
                     JSONObject jsonObject = jsonArray.optJSONObject(i);
-                    DummyItem item = new DummyItem(
+                    DummyContent.DummyItem item = new DummyItem(
                             String.valueOf(i + 1),
 //                            jsonObject.getString("id"),
                             jsonObject.getString("name")

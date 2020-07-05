@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.qimotest.dummy.DummyContent;
+import com.example.myapplication.dummy.DummyContent;
+
 
 public class ItemActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 

@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".IndexActivity"></activity>
         <activity android:name=".ItemActivity"></activity>
+        <activity android:name=".AddItemActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

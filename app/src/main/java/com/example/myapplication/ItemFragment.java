@@ -12,10 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.dummy.DummyContent;
-import com.example.myapplication.dummy.DummyContent.DummyItem;
+import com.example.qimotest.dummy.DummyContent;
+import com.example.qimotest.dummy.DummyContent.DummyItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A fragment representing a list of Items.
@@ -71,7 +77,38 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            String result = null;
+            //
+            ArrayList<DummyItem> arrayList = new ArrayList<DummyItem>();
+            try {
+
+                result = OkHttpUtil.getRequest(
+                        "http://172.18.85.254:8080/auction/api/items/byOwner");
+                System.out.println(result);
+                //把服务器返回的结果转换成JSONArray对象
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject jsonObject = jsonArray.optJSONObject(i);
+                    DummyItem item = new DummyItem(
+                            String.valueOf(i + 1),
+//                            jsonObject.getString("id"),
+                            jsonObject.getString("name")
+                             ,"");
+                            arrayList.add(item);
+
+                }
+
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(arrayList, mListener));
         }
         return view;
     }

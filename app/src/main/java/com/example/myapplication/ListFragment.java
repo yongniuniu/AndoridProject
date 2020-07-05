@@ -18,7 +18,8 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //Fragment加载布局文件，得到一个view组件
-        View view =  inflater.inflate(R.layout.fragment_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_list,container,false);
+
         ListView listView = view.findViewById(R.id.listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -33,6 +34,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        callbacks = (Callbacks) context;
+        callbacks = (Callbacks) context;//context是一个环境变量
     }
 }

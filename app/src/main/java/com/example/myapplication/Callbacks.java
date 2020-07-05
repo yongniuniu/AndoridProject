@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
 public interface Callbacks {
-    void onItemSelected(int id);
 
+    void onItemSelected(int id);
 }
